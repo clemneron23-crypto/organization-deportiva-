@@ -1,0 +1,77 @@
+# Sport Management · organizaciondeportiva.org — sitio modernizado
+
+Rediseño del sitio [organizaciondeportiva.org](https://organizaciondeportiva.org/) (Joomla, 2015) como una
+**única página estática** (`index.html`), sin dependencias externas, responsive, con tema **rojo / blanco / negro**
+(modo claro sobre blanco, modo oscuro sobre negro), **selector de idioma Español / English**, huecos para fotos y
+contacto directo con el **Dr. Víctor Jiménez Díaz-Benito**.
+
+## Uso
+
+Abre `index.html` en cualquier navegador o sírvelo desde cualquier hosting estático (GitHub Pages, Netlify, Vercel…).
+No hay build ni dependencias.
+
+## Cómo funciona el bilingüismo
+
+Cada bloque de texto existe dos veces en el HTML, con las clases `.es` y `.en`.
+El atributo `data-lang` de `<html>` decide cuál se ve (CSS):
+
+```css
+html[data-lang="es"] .en { display: none !important; }
+html[data-lang="en"] .es { display: none !important; }
+```
+
+El botón **ES | EN** de la cabecera cambia el atributo, actualiza `<html lang>` y el `<title>`, y guarda la
+preferencia en `localStorage`. El idioma inicial es el guardado o, si no hay, el del navegador.
+
+Para añadir o corregir un texto: edita el `<span class="es">…</span><span class="en">…</span>` correspondiente.
+
+## Fotos
+
+Cada `<figure class="photo" data-src="images/…">` es un hueco para una foto. Basta con guardar el archivo en la
+carpeta `images/` con el nombre indicado: si existe se muestra, si no aparece un marcador con el nombre esperado.
+La lista completa de nombres y proporciones está en [`images/README.md`](images/README.md).
+
+## Contacto: Víctor Jiménez
+
+El correo `victor.jimenez@universidadeuropea.es` aparece en la portada, en la ficha de "Nosotros", en la sección
+"Contacto" y en el botón flotante (que abre un popup con el correo y botones *Escribir* / *Copiar*; se abre solo una
+vez por visitante a los 8 s, ajustable con `AUTO_POPUP_SECONDS` en el script). Para cambiar el correo, buscar y
+reemplazar esa dirección en `index.html`.
+
+## Correspondencia con el sitio original
+
+Cada sección lleva un comentario `<!-- Origen: … -->` con la URL Joomla de la que procede.
+
+| Sección nueva (`#ancla`) | Página original |
+|---|---|
+| `#inicio` | `/` — Sports Management (home) |
+| `#nosotros`, `#victor` | `index.php?option=com_content&view=article&id=37&Itemid=197` — Nosotros |
+| `#cursos` | `…&id=3&Itemid=159` — CURSOS / `…&id=3&Itemid=189` — Ordenación Jurídica 1º CAFYD (UCJC 2015-2022) |
+| `#tutorias` | `…&id=23&Itemid=186` y `…&id=44&Itemid=211` — Organización del Deporte |
+| `#apuntes` | `…&id=6&Itemid=162` — Apuntes |
+| `#prodet` | `…&id=25&Itemid=188` — PRODET® |
+| `#grupos` | `…&id=14&Itemid=171` — Research groups |
+| `#reviews` | `…&id=13&Itemid=168` — Recent reviews |
+| `#motricidad` | `…&id=18&Itemid=173` — Ciencia y Motricidad Humana |
+| `#bibliografia` | `…&id=11&Itemid=167` — Bibliography |
+| `#revistas` | `…&id=19&Itemid=176` — Scientific Journals of Sport Management |
+| `#bases` | `…&id=34&Itemid=196` — Electronic data bases in Sports Sciences |
+| `#postgrado` | `…&id=16&Itemid=172` — Postgraduate courses |
+| `#enlaces` | `…&id=12&Itemid=169` — Sports Management Links |
+| `#ranking` | `…&id=46&Itemid=214` — Ranking facultades Ciencias del Deporte (ShanghaiRanking 2022) |
+| `#galeria` | (nuevo) galería de fotos |
+| `#media` | `…&id=41&Itemid=203` — Media & Management (La Finta) |
+| `#contacto` | `index.php?option=com_mailto…` (contacto) y `index.php?option=com_users&view=registration` (registro) |
+
+## Estado del contenido — pendiente de cotejo
+
+Durante la reconstrucción **no fue posible descargar el sitio original** (dominio bloqueado por la política de red
+del entorno de trabajo). La estructura y los textos se reconstruyeron a partir de los resúmenes indexados de cada
+página, por lo que:
+
+- Los textos son fieles en fondo pero **no son copia literal**; hay que contrastarlos con el original.
+- Las listas largas (bibliografía completa, enlaces, revistas, postgrados, miembros) pueden estar **incompletas**.
+- Las URL de los enlaces externos son las canónicas de cada organismo; conviene verificarlas contra las del sitio.
+
+Mientras dure la revisión, la página muestra un aviso en la cabecera. Para retirarlo, pon
+`SHOW_VERIFY_NOTICE = false` en el `<script>` final de `index.html` (o borra el bloque `#verifyNotice`).
