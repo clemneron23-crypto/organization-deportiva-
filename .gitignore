@@ -1,0 +1,4 @@
+# Dependencias / artefactos locales
+node_modules/
+.DS_Store
+*.log
