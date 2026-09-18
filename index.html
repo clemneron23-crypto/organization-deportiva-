@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="es" data-lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sport Management · Organización del Deporte</title>
+  <meta name="description" content="Sport Management European Research Group (Universidad Europea de Madrid): apuntes, bibliografía, grupos de investigación, PRODET®, enlaces y recursos sobre organización y gestión del deporte.">
+  <meta name="theme-color" content="#0b2545">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b2545'/%3E%3Ccircle cx='32' cy='32' r='17' fill='none' stroke='%2322c55e' stroke-width='5'/%3E%3Cpath d='M32 15v34M15 32h34' stroke='%2322c55e' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
+
+  <!--
+    ============================================================================
+    Sport Management · organizaciondeportiva.org — versión modernizada (2026)
+    ----------------------------------------------------------------------------
+    · Sitio de una sola página (index.html), sin dependencias externas.
+    · Bilingüe ES / EN: cada bloque de texto existe en dos variantes marcadas
+      con las clases .es y .en. El atributo data-lang de <html> decide cuál se
+      muestra (ver CSS al final del <style> y el script al final del <body>).
+    · Cada sección conserva, en un comentario, la URL original de Joomla de la
+      que procede, para facilitar el cotejo con el sitio antiguo.
+    · Los enlaces externos se abren en pestaña nueva (rel="noopener").
+    ============================================================================
+  -->
+
+  <style>
+    /* ---------- Tokens ---------- */
+    :root {
+      --bg: #f6f8fb;
+      --bg-elev: #ffffff;
+      --bg-soft: #eef2f7;
+      --text: #14213d;
+      --text-muted: #55627a;
+      --line: #dbe2ec;
+      --brand: #0b2545;
+      --brand-2: #13315c;
+      --accent: #16a34a;
+      --accent-strong: #15803d;
+      --accent-soft: #dcfce7;
+      --link: #0e5aa7;
+      --warn-bg: #fff7ed;
+      --warn-line: #fdba74;
+      --warn-text: #7c2d12;
+      --shadow: 0 1px 2px rgba(11,37,69,.06), 0 8px 24px rgba(11,37,69,.08);
+      --radius: 14px;
+      --maxw: 1180px;
+      --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    }
+    :root:not([data-theme="light"]) { }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #0c1220;
+        --bg-elev: #131c2e;
+        --bg-soft: #18233a;
+        --text: #e7ecf5;
+        --text-muted: #a5b1c6;
+        --line: #26324a;
+        --brand: #0b2545;
+        --brand-2: #13315c;
+        --accent: #22c55e;
+        --accent-strong: #4ade80;
+        --accent-soft: #143324;
+        --link: #7ab8ff;
+        --warn-bg: #2a1a0c;
+        --warn-line: #b45309;
+        --warn-text: #fdba74;
+        --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.35);
+      }
+    }
+    :root[data-theme="dark"] {
+      --bg: #0c1220; --bg-elev: #131c2e; --bg-soft: #18233a; --text: #e7ecf5;
+      --text-muted: #a5b1c6; --line: #26324a; --accent: #22c55e; --accent-strong: #4ade80;
+      --accent-soft: #143324; --link: #7ab8ff; --warn-bg: #2a1a0c; --warn-line: #b45309;
+      --warn-text: #fdba74; --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.35);
+    }
+
+    /* ---------- Base ---------- */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+    body {
+      margin: 0; font-family: var(--font); color: var(--text); background: var(--bg);
+      line-height: 1.6; -webkit-font-smoothing: antialiased; font-size: 16px;
+    }
+    a { color: var(--link); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    h1, h2, h3, h4 { line-height: 1.2; margin: 0 0 .5em; letter-spacing: -.01em; }
+    h1 { font-size: clamp(2rem, 4.5vw, 3.25rem); font-weight: 800; }
+    h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; }
+    h3 { font-size: 1.2rem; font-weight: 700; }
+    h4 { font-size: 1rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: .06em; }
+    p { margin: 0 0 1em; }
+    ul, ol { margin: 0 0 1em; padding-left: 1.3em; }
+    li { margin-bottom: .35em; }
+    .container { width: min(100% - 32px, var(--maxw)); margin-inline: auto; }
+    .muted { color: var(--text-muted); }
+    .visually-hidden { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+    .skip-link { position:absolute; left:-999px; top:8px; background:var(--accent); color:#fff; padding:8px 12px; border-radius:8px; z-index:1000; }
+    .skip-link:focus { left:8px; }
+
+    /* ---------- Header / Nav ---------- */
+    .site-header {
+      position: sticky; top: 0; z-index: 100;
+      background: color-mix(in srgb, var(--bg-elev) 88%, transparent);
+      backdrop-filter: saturate(160%) blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .header-inner { display: flex; align-items: center; gap: 16px; min-height: 68px; }
+    .brand { display: flex; align-items: center; gap: 12px; color: var(--text); font-weight: 800; }
+    .brand:hover { text-decoration: none; }
+    .brand-mark { width: 38px; height: 38px; border-radius: 10px; background: var(--brand); display: grid; place-items: center; flex: none; }
+    .brand-mark svg { width: 22px; height: 22px; }
+    .brand-text { display: flex; flex-direction: column; line-height: 1.1; }
+    .brand-text small { font-weight: 500; color: var(--text-muted); font-size: .75rem; }
+    .nav { margin-left: auto; display: flex; align-items: center; gap: 4px; }
+    .nav a { color: var(--text); padding: 8px 12px; border-radius: 8px; font-weight: 600; font-size: .93rem; white-space: nowrap; }
+    .nav a:hover { background: var(--bg-soft); text-decoration: none; }
+    .nav a.active { color: var(--accent-strong); background: var(--accent-soft); }
+    .controls { display: flex; align-items: center; gap: 8px; }
+    .lang-switch { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; background: var(--bg-elev); }
+    .lang-switch button {
+      border: 0; background: transparent; color: var(--text-muted); font: inherit; font-weight: 700; font-size: .85rem;
+      padding: 6px 12px; cursor: pointer; letter-spacing: .04em;
+    }
+    .lang-switch button[aria-pressed="true"] { background: var(--brand); color: #fff; }
+    .icon-btn { border: 1px solid var(--line); background: var(--bg-elev); color: var(--text); width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center; cursor: pointer; }
+    .icon-btn svg { width: 20px; height: 20px; }
+    .menu-toggle { display: none; }
+    @media (max-width: 960px) {
+      .menu-toggle { display: grid; }
+      .nav { display: none; position: absolute; left: 0; right: 0; top: 100%; flex-direction: column; align-items: stretch; background: var(--bg-elev); border-bottom: 1px solid var(--line); padding: 8px 16px 16px; box-shadow: var(--shadow); }
+      .nav.open { display: flex; }
+      .nav a { padding: 12px; }
+      .brand-text small { display: none; }
+    }
+
+    /* ---------- Notice ---------- */
+    .notice { background: var(--warn-bg); border-bottom: 1px solid var(--warn-line); color: var(--warn-text); font-size: .9rem; }
+    .notice .container { display: flex; gap: 12px; align-items: flex-start; padding: 10px 0; }
+    .notice button { margin-left: auto; border: 0; background: transparent; color: inherit; font-weight: 700; cursor: pointer; }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      position: relative; overflow: hidden; color: #fff;
+      background: radial-gradient(1200px 600px at 80% -10%, #1d4ed8 0%, transparent 55%),
+                  radial-gradient(900px 500px at 0% 110%, #16a34a 0%, transparent 50%),
+                  linear-gradient(135deg, var(--brand) 0%, var(--brand-2) 100%);
+    }
+    .hero::after { content: ""; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Ccircle cx='1' cy='1' r='1' fill='rgba(255,255,255,.08)'/%3E%3C/svg%3E"); pointer-events: none; }
+    .hero .container { position: relative; z-index: 1; padding: clamp(56px, 9vw, 112px) 0; display: grid; gap: 24px; max-width: 860px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; color: #bbf7d0; }
+    .eyebrow::before { content: ""; width: 28px; height: 2px; background: var(--accent); }
+    .hero p.lead { font-size: 1.15rem; color: #d7e1f2; max-width: 60ch; }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; border-radius: 10px; font-weight: 700; border: 1px solid transparent; cursor: pointer; font: inherit; }
+    .btn:hover { text-decoration: none; transform: translateY(-1px); }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: var(--accent-strong); }
+    .btn-ghost { background: rgba(255,255,255,.08); color: #fff; border-color: rgba(255,255,255,.3); }
+    .btn-ghost:hover { background: rgba(255,255,255,.16); }
+    .btn-outline { background: var(--bg-elev); color: var(--text); border-color: var(--line); }
+    .btn-outline:hover { border-color: var(--accent); }
+    .hero-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-top: 12px; }
+    .stat { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15); border-radius: 12px; padding: 14px 16px; }
+    .stat strong { display: block; font-size: 1.4rem; }
+    .stat span { font-size: .85rem; color: #cbd5e1; }
+
+    /* ---------- Sections ---------- */
+    section.block { padding: clamp(48px, 7vw, 88px) 0; border-bottom: 1px solid var(--line); }
+    section.block.alt { background: var(--bg-soft); }
+    .section-head { max-width: 760px; margin-bottom: 32px; }
+    .section-head .eyebrow { color: var(--accent-strong); }
+    .grid { display: grid; gap: 20px; }
+    .grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+    .grid-2x2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+    @media (min-width: 700px) { .grid-2x2 { grid-template-columns: 1fr 1fr; } }
+    .card { background: var(--bg-elev); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
+    .card h3 { display: flex; align-items: center; gap: 10px; }
+    .card h3 .ico { width: 34px; height: 34px; border-radius: 9px; background: var(--accent-soft); color: var(--accent-strong); display: grid; place-items: center; flex: none; }
+    .card h3 .ico svg { width: 18px; height: 18px; }
+    .card ul { padding-left: 1.2em; }
+    .card .src { font-size: .85rem; color: var(--text-muted); border-top: 1px dashed var(--line); padding-top: 10px; margin-top: 12px; }
+    .tag { display: inline-block; font-size: .75rem; font-weight: 700; padding: 3px 9px; border-radius: 999px; background: var(--accent-soft); color: var(--accent-strong); margin-right: 6px; }
+    .list-links li { display: flex; gap: 8px; align-items: baseline; }
+    .list-links li::before { content: "↗"; color: var(--accent); font-weight: 700; flex: none; }
+    .topics { counter-reset: t; list-style: none; padding: 0; display: grid; gap: 10px; }
+    .topics li { counter-increment: t; display: grid; grid-template-columns: 44px 1fr; gap: 12px; align-items: center; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg-elev); }
+    .topics li::before { content: counter(t); width: 44px; height: 44px; border-radius: 10px; background: var(--brand); color: #fff; display: grid; place-items: center; font-weight: 800; }
+    .schedule { display: flex; gap: 14px; align-items: center; padding: 14px 16px; border-radius: 12px; background: var(--accent-soft); color: var(--accent-strong); font-weight: 600; }
+    .schedule svg { width: 22px; height: 22px; flex: none; }
+    .refs { list-style: none; padding: 0; }
+    .refs li { padding: 10px 0; border-bottom: 1px solid var(--line); font-size: .95rem; }
+    .refs li:last-child { border-bottom: 0; }
+    .refs em { color: var(--text-muted); }
+    details { border: 1px solid var(--line); border-radius: 12px; background: var(--bg-elev); margin-bottom: 10px; }
+    details summary { cursor: pointer; padding: 14px 16px; font-weight: 700; list-style: none; display: flex; align-items: center; gap: 10px; }
+    details summary::-webkit-details-marker { display: none; }
+    details summary::after { content: "+"; margin-left: auto; font-size: 1.2rem; color: var(--accent-strong); }
+    details[open] summary::after { content: "–"; }
+    details .body { padding: 0 16px 16px; }
+
+    /* ---------- Contact ---------- */
+    .contact-box { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+
+    /* ---------- Footer ---------- */
+    footer { padding: 36px 0 48px; color: var(--text-muted); font-size: .9rem; }
+    footer .container { display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: center; }
+    footer nav { display: flex; flex-wrap: wrap; gap: 14px; }
+    .to-top { position: fixed; right: 16px; bottom: 16px; opacity: 0; pointer-events: none; transition: opacity .2s; }
+    .to-top.show { opacity: 1; pointer-events: auto; }
+
+    /* ---------- i18n: sólo se muestra el idioma activo ---------- */
+    html[data-lang="es"] .en { display: none !important; }
+    html[data-lang="en"] .es { display: none !important; }
+
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn:hover { transform: none; } }
+    @media print { .site-header, .notice, .to-top { display: none; } section.block { padding: 24px 0; } }
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main"><span class="es">Saltar al contenido</span><span class="en">Skip to content</span></a>
+
+<!-- =============================== HEADER =============================== -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="#inicio" aria-label="Sport Management — inicio">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 4v16M4 12h16"/></svg>
+      </span>
+      <span class="brand-text">
+        <span>Sport Management</span>
+        <small><span class="es">Organización del Deporte</span><span class="en">Sports Organisation</span></small>
+      </span>
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Principal">
+      <a href="#inicio"><span class="es">Inicio</span><span class="en">Home</span></a>
+      <a href="#nosotros"><span class="es">Nosotros</span><span class="en">About us</span></a>
+      <a href="#docencia"><span class="es">Docencia</span><span class="en">Teaching</span></a>
+      <a href="#investigacion"><span class="es">Investigación</span><span class="en">Research</span></a>
+      <a href="#recursos"><span class="es">Recursos</span><span class="en">Resources</span></a>
+      <a href="#media"><span class="es">Media</span><span class="en">Media</span></a>
+      <a href="#contacto"><span class="es">Contacto</span><span class="en">Contact</span></a>
+    </nav>
+
+    <div class="controls">
+      <div class="lang-switch" role="group" aria-label="Idioma / Language">
+        <button type="button" data-set-lang="es" aria-pressed="true" lang="es">ES</button>
+        <button type="button" data-set-lang="en" aria-pressed="false" lang="en">EN</button>
+      </div>
+      <button class="icon-btn" id="themeToggle" type="button" aria-label="Cambiar tema / Toggle theme" title="Tema / Theme">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+      <button class="icon-btn menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Menú / Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Aviso de cotejo: eliminar (o poner SHOW_VERIFY_NOTICE = false en el script) cuando el contenido se haya contrastado con el sitio original. -->
+<div class="notice" id="verifyNotice" hidden>
+  <div class="container">
+    <span aria-hidden="true">⚠️</span>
+    <span class="es">Versión en revisión: el texto de esta página se está cotejando con el contenido original de organizaciondeportiva.org.</span>
+    <span class="en">Version under review: the text on this page is being checked against the original content of organizaciondeportiva.org.</span>
+    <button type="button" id="dismissNotice" aria-label="Cerrar aviso">✕</button>
+  </div>
+</div>
+
+<main id="main">
+
+<!-- =============================== HERO / INICIO =============================== -->
+<!-- Origen: https://organizaciondeportiva.org/ -->
+<section class="hero" id="inicio">
+  <div class="container">
+    <span class="eyebrow">
+      <span class="es">Universidad Europea de Madrid</span>
+      <span class="en">Universidad Europea de Madrid</span>
+    </span>
+    <h1>
+      <span class="es">Sport Management European Research Group</span>
+      <span class="en">Sport Management European Research Group</span>
+    </h1>
+    <p class="lead">
+      <span class="es">Grupo de investigación en organización y gestión del deporte. Docencia, investigación, apuntes, bibliografía y recursos sobre la Organización del Deporte para estudiantes, docentes y profesionales.</span>
+      <span class="en">Research group on sports organisation and management. Teaching, research, lecture notes, bibliography and resources on Sports Organisation for students, lecturers and practitioners.</span>
+    </p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#apuntes"><span class="es">Ver apuntes</span><span class="en">View lecture notes</span></a>
+      <a class="btn btn-ghost" href="#investigacion"><span class="es">Investigación</span><span class="en">Research</span></a>
+      <a class="btn btn-ghost" href="https://organizaciondeportiva.org/index.php?option=com_users&view=registration" target="_blank" rel="noopener"><span class="es">Registro de usuario</span><span class="en">User registration</span> ↗</a>
+    </div>
+    <div class="hero-stats" aria-label="Resumen">
+      <div class="stat"><strong>5</strong><span><span class="es">temas de apuntes</span><span class="en">lecture-note topics</span></span></div>
+      <div class="stat"><strong>PRODET®</strong><span><span class="es">promoción de ejercicio en el trabajo</span><span class="en">promotion of exercise at work</span></span></div>
+      <div class="stat"><strong>2015 – 2025</strong><span><span class="es">una década en línea</span><span class="en">a decade online</span></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================== NOSOTROS =============================== -->
+<!-- Origen: https://organizaciondeportiva.org/index.php?option=com_content&view=article&id=37&Itemid=197 -->
+<section class="block" id="nosotros">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow"><span class="es">Nosotros</span><span class="en">About us</span></span>
+      <h2><span class="es">Quiénes somos</span><span class="en">Who we are</span></h2>
+      <p class="muted">
+        <span class="es">Profesores universitarios especialistas en docencia e investigación en el ámbito de la organización de la actividad física y el deporte.</span>
+        <span class="en">University lecturers specialising in teaching and research in the field of the organisation of physical activity and sport.</span>
+      </p>
+    </div>
+
+    <div class="grid grid-2">
+      <article class="card">
+        <h3><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><span class="es">El grupo</span><span class="en">The group</span></h3>
+        <p class="es">Sport Management es el grupo de investigación europeo en gestión del deporte (<em>Sport Management European Research Group</em>) vinculado a la Universidad Europea de Madrid. Reúne a docentes e investigadores de distintas universidades españolas dedicados a la organización y gestión deportiva.</p>
+        <p class="en">Sport Management is the European research group in sport management (<em>Sport Management European Research Group</em>) linked to Universidad Europea de Madrid. It brings together lecturers and researchers from several Spanish universities devoted to sports organisation and management.</p>
+        <p class="es">Una asociación que da cabida a todas las personas que están interesadas en trabajar por y para la educación en igualdad.</p>
+        <p class="en">An association open to everyone interested in working for and towards education in equality.</p>
+      </article>
+
+      <article class="card">
+        <h3><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg></span><span class="es">Miembros</span><span class="en">Members</span></h3>
+        <ul>
+          <li class="es"><strong>Dr. Jesús Martínez del Castillo</strong> — profesor universitario, especialista en docencia e investigación en organización de la actividad física y el deporte.</li>
+          <li class="en"><strong>Dr. Jesús Martínez del Castillo</strong> — university lecturer, specialist in teaching and research on the organisation of physical activity and sport.</li>
+          <li class="es">Profesores asociados en facultades de Educación y de Ciencias de la Salud, vinculados a másteres de gestión deportiva en distintas universidades.</li>
+          <li class="en">Associate lecturers at faculties of Education and Health Sciences, involved in sports management master's programmes at several universities.</li>
+        </ul>
+        <p class="es">Miembros del grupo han formado parte del comité organizador del <strong>XIV Congreso Iberoamericano de Economía del Deporte</strong>, con actividades en varias universidades españolas.</p>
+        <p class="en">Members of the group have served on the organising committee of the <strong>XIV Ibero-American Congress on Sports Economics</strong>, with activities held at several Spanish universities.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- =============================== DOCENCIA =============================== -->
+<section class="block alt" id="docencia">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow"><span class="es">Docencia</span><span class="en">Teaching</span></span>
+      <h2><span class="es">Cursos, apuntes y tutorías</span><span class="en">Courses, lecture notes and tutorials</span></h2>
+    </div>
+
+    <!-- Origen: CURSOS — index.php?option=com_content&view=article&id=3&Itemid=159
+                 Ordenación Jurídica - 1º CAFYD (UCJC, 2015-2022) — id=3&Itemid=189 -->
+    <div class="grid grid-2" style="margin-bottom:20px">
+      <article class="card" id="cursos">
+        <h3><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span><span class="es">Cursos</span><span class="en">Courses</span></h3>
+        <ul>
+          <li><span class="tag">UCJC · 2015–2022</span><span class="es"><strong>Ordenación Jurídica</strong> — 1º CAFYD (Grado en Ciencias de la Actividad Física y del Deporte, Universidad Camilo José Cela).</span><span class="en"><strong>Legal Regulation of Sport</strong> — 1st year CAFYD (Degree in Physical Activity and Sport Sciences, Universidad Camilo José Cela).</span></li>
+          <li><span class="tag">CAFYD</span><span class="es"><strong>Organización del Deporte</strong> — asignatura del plan de estudios del Grado.</span><span class="en"><strong>Sports Organisation</strong> — subject in the Degree curriculum.</span></li>
+        </ul>
+      </article>
+
+      <!-- Origen: Organización del Deporte — id=23&Itemid=186 y id=44&Itemid=211 -->
+      <article class="card" id="tutorias">
+        <h3><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span><span class="es">Tutorías</span><span class="en">Office hours</span></h3>
+        <div class="schedule">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+          <span class="es">Martes y miércoles, de 13:00 a 16:00 h — Departamento de Ciencias de la Actividad Física y del Deporte.</span>
+          <span class="en">Tuesdays and Wednesdays, 1:00 – 4:00 pm — Department of Physical Activity and Sport Sciences.</span>
+        </div>
+        <p class="es" style="margin-top:12px">Las tutorías presenciales requieren <strong>cita previa</strong>.</p>
+        <p class="en" style="margin-top:12px">In-person tutorials require <strong>a prior appointment</strong>.</p>
+        <h4><span class="es">Proyectos vinculados a la asignatura</span><span class="en">Projects linked to the subject</span></h4>
+        <ul>
+          <li class="es"><strong>AppScience</strong> (Facultad de Ciencias de la Salud, Universidad Camilo José Cela): iniciativa que une deporte, ciencia y tecnología para crear una fuente de referencias bibliográficas para las empresas del <a href="https://sportsinnovationcenter.com/" target="_blank" rel="noopener">Global Sports Innovation Center (GSIC)</a>, ofreciendo formación complementaria a estudiantes y profesorado de la UCJC para fomentar el emprendimiento, la investigación y la innovación empresarial.</li>
+          <li class="en"><strong>AppScience</strong> (Faculty of Health Sciences, Universidad Camilo José Cela): an initiative combining sport, science and technology to build a bibliographic reference source for the companies of the <a href="https://sportsinnovationcenter.com/" target="_blank" rel="noopener">Global Sports Innovation Center (GSIC)</a>, offering complementary training to UCJC students and staff to foster entrepreneurship, research and business innovation.</li>
+          <li class="es"><strong>Promoción de hábitos saludables en el campus</strong>: servicio gratuito diseñado por los estudiantes en el marco de tres asignaturas del plan de estudios, entre ellas Organización del Deporte.</li>
+          <li class="en"><strong>Promotion of healthy habits on campus</strong>: a free service designed by students as part of three subjects in the curriculum, including Sports Organisation.</li>
+        </ul>
+      </article>
+    </div>
+
+    <!-- Origen: Apuntes — index.php?option=com_content&view=article&id=6&Itemid=162 -->
+    <article class="card" id="apuntes">
+      <h3><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></span><span class="es">Apuntes de Organización del Deporte</span><span class="en">Sports Organisation lecture notes</span></h3>
+      <p class="muted es">Apuntes organizados por temas para la asignatura de Organización y Legislación del Deporte.</p>
+      <p class="muted en">Lecture notes organised by topic for the Sports Organisation and Legislation subject.</p>
+      <ol class="topics">
+        <li><span><span class="es"><strong>Introducción</strong> a la organización y legislación deportiva</span><span class="en"><strong>Introduction</strong> to sports organisation and legislation</span></span></li>
+        <li><span><span class="es"><strong>Ordenamiento jurídico</strong> deportivo</span><span class="en">The <strong>legal framework</strong> of sport</span></span></li>
+        <li><span><span class="es"><strong>Organización administrativa</strong> del deporte</span><span class="en"><strong>Administrative organisation</strong> of sport</span></span></li>
+        <li><span><span class="es"><strong>Estructura asociativa</strong> del deporte</span><span class="en"><strong>Associative structure</strong> of sport</span></span></li>
+        <li><span><span class="es"><strong>Estructura del deporte profesional</strong></span><span class="en"><strong>Structure of professional sport</strong></span></span></li>
+      </ol>
+      <p class="src">
+        <span class="es">Fuente principal: Blanco, E. (2006). <em>Manual de la organización institucional del deporte</em>. Barcelona: Editorial Paidotribo.</span>
+        <span class="en">Main source: Blanco, E. (2006). <em>Manual de la organización institucional del deporte</em>. Barcelona: Editorial Paidotribo.</span>
+      </p>
+    </article>
+  </div>
+</section>
+
+<!-- =============================== INVESTIGACIÓN =============================== -->
+<section class="block" id="investigacion">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow"><span class="es">Investigación</span><span class="en">Research</span></span>
+      <h2><span class="es">Líneas, grupos y actividad científica</span><span class="en">Research lines, groups and scientific activity</span></h2>
+    </div>
+
+    <div class="grid grid-2x2">
+      <!-- Origen: PRODET® — index.php?option=com_content&view=article&id=25&Itemid=188 -->
+      <article class="card" id="prodet">
+        <h3><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>PRODET®</h3>
+        <p class="es"><strong>PRODET®</strong> es el acrónimo de <em>Promoción de Ejercicio en el Trabajo</em>. Engloba la investigación sobre programas de ejercicio físico en los centros de trabajo, dentro de la línea de estudio de la <strong>Organización de Programas de Ejercicio</strong>.</p>
+        <p class="en"><strong>PRODET®</strong> stands for <em>Promoción de Ejercicio en el Trabajo</em> (Promotion of Exercise at Work). It covers research on physical exercise programmes in the workplace, within the <strong>Organisation of Exercise Programmes</strong> line of study.</p>
+        <p class="es">PRODET® necesita <strong>voluntarios</strong> para cubrir distintas funciones que ayudan a sostener la investigación.</p>
+        <p class="en">PRODET® needs <strong>volunteers</strong> to cover a range of roles that help support the research.</p>
+        <a class="btn btn-outline" href="#contacto"><span class="es">Quiero colaborar</span><span class="en">I want to collaborate</span></a>
+      </article>
+
+      <!-- Origen: Research groups — index.php?option=com_content&view=article&id=14&Itemid=171 -->
+      <article class="card" id="grupos">
+        <h3><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></span><span class="es">Grupos de investigación</span><span class="en">Research groups</span></h3>
+        <p class="muted es">Grupos destacados de investigación en organización del deporte.</p>
+        <p class="muted en">Leading research groups in sports organisation.</p>
+        <ul>
+          <li><strong>Sport Management European Research Group</strong> <span class="es">(UE)</span><span class="en">(EU)</span></li>
+          <li><strong>Grupo IGOID</strong> — <span class="es">Universidad de Castilla-La Mancha</span><span class="en">University of Castilla-La Mancha</span></li>
+          <li><strong>SENDINOS</strong> — <span class="es">Grupo de Investigación en Gestión Deportiva y Sostenibilidad, Universidad Católica San Antonio de Murcia (UCAM)</span><span class="en">Research Group on Sports Management and Sustainability, Universidad Católica San Antonio de Murcia (UCAM)</span></li>
+          <li><span class="es">Agencia de investigación en gestión e innovación de servicios deportivos (interuniversitario)</span><span class="en">Research agency for sports service management and innovation (inter-university)</span></li>
+          <li><span class="es">Centros de Estudios Olímpicos</span><span class="en">Olympic Studies Centres</span></li>
+        </ul>
+      </article>
+
+      <!-- Origen: Recent reviews — index.php?option=com_content&view=article&id=13&Itemid=168 -->
+      <article class="card" id="reviews">
+        <h3><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span><span class="es">Reseñas recientes</span><span class="en">Recent reviews</span></h3>
+        <p><span class="tag"><span class="es">Octubre 2014</span><span class="en">October 2014</span></span></p>
+        <p class="es"><strong>Conferencia inaugural de la World Association for Sport Management (WASM)</strong>, celebrada en la Universidad Europea de Madrid. Contribuciones académicas sobre intervenciones de actividad física, investigación en organización deportiva y tendencias internacionales de la investigación en organización del deporte.</p>
+        <p class="en"><strong>Inaugural Conference of the World Association for Sport Management (WASM)</strong>, held at Universidad Europea de Madrid. Academic contributions on physical activity interventions, research on sports organisation and international trends in sports organisation research.</p>
+      </article>
+
+      <!-- Origen: CIENCIA Y MOTRICIDAD HUMANA — index.php?option=com_content&view=article&id=18&Itemid=173 -->
+      <article class="card" id="motricidad">
+        <h3><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="5" r="2"/><path d="M12 7v6l-3 7M12 13l3 7M9 10l3 3 3-3"/></svg></span><span class="es">Ciencia y Motricidad Humana</span><span class="en">Science and Human Motricity</span></h3>
+        <p class="es">Selección de textos sobre la <strong>epistemología de la motricidad humana</strong> como objeto de estudio de las Ciencias de la Actividad Física y del Deporte, y sobre el deporte en la sociedad contemporánea (Editorial Prensa Española).</p>
+        <p class="en">A selection of texts on the <strong>epistemology of human motricity</strong> as the object of study of the Sciences of Physical Activity and Sport, and on sport in contemporary society (Editorial Prensa Española).</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- =============================== RECURSOS =============================== -->
+<section class="block alt" id="recursos">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow"><span class="es">Recursos</span><span class="en">Resources</span></span>
+      <h2><span class="es">Bibliografía, revistas, bases de datos y enlaces</span><span class="en">Bibliography, journals, databases and links</span></h2>
+    </div>
+
+    <!-- Origen: Bibliography — index.php?option=com_content&view=article&id=11&Itemid=167 -->
+    <details open id="bibliografia">
+      <summary><span class="es">Bibliografía recomendada</span><span class="en">Recommended bibliography</span></summary>
+      <div class="body">
+        <ul class="refs">
+          <li>Chelladurai, P. (1994). Sport management: Defining the field. <em>European Journal of Sport Management</em>.</li>
+          <li>Chelladurai, P. (2009). <em>Managing organizations for sport &amp; physical activity: A systems perspective</em>.</li>
+          <li>Chelladurai, P. (2013). A personal journey in theorizing in sport management. <em>Sport Management Review</em>.</li>
+          <li>Cunningham, G. B. (2013). Theory and theory development in sport management. <em>Sport Management Review</em>.</li>
+          <li>Slack, T. (1991). Sport Management: Some thoughts on future directions. <em>Journal of Sport Management</em>.</li>
+          <li>Slack, T. (1997). <em>Understanding sport organizations: The application of organization theory</em>. Champaign, IL: Human Kinetics.</li>
+          <li>Soucie, D. (2002). <em>Administración, Organización y Gestión Deportiva</em>. Barcelona: Inde.</li>
+          <li><span class="es">Martínez del Castillo, J. y Acosta, R. — obras sobre planificación, organización y gestión de organizaciones deportivas.</span><span class="en">Martínez del Castillo, J. &amp; Acosta, R. — works on planning, organisation and management of sports organisations.</span></li>
+          <li>Blanco, E. (2006). <em>Manual de la organización institucional del deporte</em>. Barcelona: Paidotribo.</li>
+        </ul>
+      </div>
+    </details>
+
+    <!-- Origen: Scientific Journals of Sport Management — index.php?option=com_content&view=article&id=19&Itemid=176 -->
+    <details id="revistas">
+      <summary><span class="es">Revistas científicas de gestión deportiva</span><span class="en">Scientific journals of sport management</span></summary>
+      <div class="body">
+        <ul class="list-links">
+          <li><a href="https://journals.humankinetics.com/view/journals/jsm/jsm-overview.xml" target="_blank" rel="noopener">Journal of Sport Management</a></li>
+          <li><a href="https://www.sciencedirect.com/journal/sport-management-review" target="_blank" rel="noopener">Sport Management Review</a></li>
+          <li><a href="https://www.tandfonline.com/journals/resm20" target="_blank" rel="noopener">European Sport Management Quarterly</a></li>
+          <li><a href="https://www.emeraldgrouppublishing.com/journal/sbm" target="_blank" rel="noopener">Sport, Business and Management: An International Journal</a></li>
+          <li><a href="https://www.inderscience.com/jhome.php?jcode=ijsmm" target="_blank" rel="noopener">International Journal of Sport Management and Marketing</a></li>
+          <li><a href="https://recyt.fecyt.es/index.php/retos" target="_blank" rel="noopener">Retos. Nuevas tendencias en Educación Física, Deporte y Recreación</a></li>
+          <li><a href="https://revistas.um.es/sportk" target="_blank" rel="noopener">SPORT TK – Revista EuroAmericana de Ciencias del Deporte</a></li>
+        </ul>
+      </div>
+    </details>
+
+    <!-- Origen: Electronic data bases in Sports Sciences — index.php?option=com_content&view=article&id=34&Itemid=196 -->
+    <details id="bases">
+      <summary><span class="es">Bases de datos electrónicas en Ciencias del Deporte</span><span class="en">Electronic databases in Sports Sciences</span></summary>
+      <div class="body">
+        <p class="es">Para el campo multidisciplinar de las Ciencias de la Actividad Física y del Deporte, las búsquedas bibliográficas formales pueden realizarse en las siguientes bases de datos:</p>
+        <p class="en">For the multidisciplinary field of Physical Activity and Sport Sciences, formal literature searches can be carried out in the following databases:</p>
+        <ul class="list-links">
+          <li><a href="https://www.ebsco.com/products/research-databases/sportdiscus" target="_blank" rel="noopener">SPORTDiscus</a> — <span class="es">base de datos de referencia del área, con una colección bibliográfica de unas 680 revistas publicadas desde 1985 hasta la actualidad.</span><span class="en">the reference database of the field, with a bibliographic collection of about 680 journals published from 1985 to date.</span></li>
+          <li><a href="https://pubmed.ncbi.nlm.nih.gov/" target="_blank" rel="noopener">PubMed</a></li>
+          <li><a href="https://www.sciencedirect.com/" target="_blank" rel="noopener">Science Direct</a></li>
+          <li><a href="https://pedro.org.au/" target="_blank" rel="noopener">PEDro</a></li>
+          <li><a href="https://www.webofscience.com/" target="_blank" rel="noopener">Web of Science</a></li>
+          <li><a href="https://eric.ed.gov/" target="_blank" rel="noopener">ERIC</a></li>
+          <li><a href="https://dialnet.unirioja.es/" target="_blank" rel="noopener">Dialnet</a></li>
+          <li><a href="https://www.aeaweb.org/econlit/" target="_blank" rel="noopener">EconLit</a></li>
+        </ul>
+      </div>
+    </details>
+
+    <!-- Origen: Postgraduate courses — index.php?option=com_content&view=article&id=16&Itemid=172 -->
+    <details id="postgrado">
+      <summary><span class="es">Cursos de postgrado</span><span class="en">Postgraduate courses</span></summary>
+      <div class="body">
+        <ul class="list-links">
+          <li><a href="https://www.inef.upm.es/" target="_blank" rel="noopener">Máster en Dirección de Organizaciones e Instalaciones de la Actividad Física y del Deporte</a> — <span class="es">Universidad Politécnica de Madrid (INEF)</span><span class="en">Universidad Politécnica de Madrid (INEF)</span></li>
+          <li><a href="https://www.udl.cat/" target="_blank" rel="noopener"><span class="es">Postgrados en Ciencias del Deporte — Universidad de Lleida</span><span class="en">Postgraduate programmes in Sport Sciences — University of Lleida</span></a></li>
+          <li><a href="https://universidadeuropea.com/en/master-sports-management-real-madrid/" target="_blank" rel="noopener">MBA in Sports Management — Universidad Europea / Real Madrid Graduate School</a></li>
+        </ul>
+      </div>
+    </details>
+
+    <!-- Origen: Sports Management Links — index.php?option=com_content&view=article&id=12&Itemid=169 -->
+    <details id="enlaces">
+      <summary><span class="es">Enlaces de gestión deportiva</span><span class="en">Sports management links</span></summary>
+      <div class="body grid grid-2">
+        <div>
+          <h4><span class="es">Centros de innovación</span><span class="en">Innovation centres</span></h4>
+          <ul class="list-links">
+            <li><a href="https://www.ibv.org/" target="_blank" rel="noopener">Instituto de Biomecánica de Valencia (IBV)</a></li>
+            <li><a href="https://sportsinnovationcenter.com/" target="_blank" rel="noopener">Global Sports Innovation Center (GSIC)</a></li>
+          </ul>
+          <h4><span class="es">Ferias y exposiciones</span><span class="en">Trade shows and exhibitions</span></h4>
+          <ul class="list-links">
+            <li><a href="https://www.sportsbusinesssymposium.com/" target="_blank" rel="noopener">Sports Business Symposium</a></li>
+            <li><a href="https://www.gymfactory.net/" target="_blank" rel="noopener">Gym Factory Fairs</a></li>
+            <li><a href="https://www.fibo.com/" target="_blank" rel="noopener">FIBO — <span class="es">Feria Internacional del Fitness</span><span class="en">International Fitness Fair</span></a></li>
+          </ul>
+        </div>
+        <div>
+          <h4><span class="es">Congresos científicos</span><span class="en">Scientific conferences</span></h4>
+          <ul class="list-links">
+            <li><a href="https://sport-science.org/" target="_blank" rel="noopener">ECSS Annual Congress of Sport Science</a></li>
+            <li><a href="https://www.easm.net/" target="_blank" rel="noopener">European Sport Management Conference (EASM)</a></li>
+            <li><a href="https://www.worldsportmanagement.org/" target="_blank" rel="noopener">World Association for Sport Management (WASM) Conference</a></li>
+            <li><span class="es">Congresos españoles e iberoamericanos de Ciencias del Deporte y de Economía del Deporte</span><span class="en">Spanish and Ibero-American conferences on Sport Sciences and Sports Economics</span></li>
+          </ul>
+          <h4><span class="es">Ayudas y premios de investigación</span><span class="en">Research funding and awards</span></h4>
+          <ul class="list-links">
+            <li><a href="https://www.fagde.org/" target="_blank" rel="noopener"><span class="es">Premio «José María Cagigal» — FAGDE (Federación de Asociaciones de Gestores del Deporte de España)</span><span class="en">“José María Cagigal” Award — FAGDE (Spanish Federation of Sports Management Associations)</span></a></li>
+            <li><span class="es">Ayudas a la investigación en gestión deportiva</span><span class="en">Research grants in sports management</span></li>
+          </ul>
+        </div>
+      </div>
+    </details>
+
+    <!-- Origen: Ranking de las facultades y departamentos de Ciencias del Deporte en España — id=46&Itemid=214 -->
+    <details id="ranking">
+      <summary><span class="es">Ranking de facultades y departamentos de Ciencias del Deporte en España</span><span class="en">Ranking of Sport Science faculties and departments in Spain</span></summary>
+      <div class="body">
+        <p class="es">Clasificación de las facultades y departamentos españoles de Ciencias del Deporte según el <a href="https://www.shanghairanking.com/rankings/gras/2022/RS0411" target="_blank" rel="noopener">Global Ranking of Academic Subjects – Sport Science</a> (Copyright © 2022 ShanghaiRanking Consultancy. All Rights Reserved).</p>
+        <p class="en">Ranking of Spanish Sport Science faculties and departments according to the <a href="https://www.shanghairanking.com/rankings/gras/2022/RS0411" target="_blank" rel="noopener">Global Ranking of Academic Subjects – Sport Science</a> (Copyright © 2022 ShanghaiRanking Consultancy. All Rights Reserved).</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- =============================== MEDIA & MANAGEMENT =============================== -->
+<!-- Origen: Media & Management — index.php?option=com_content&view=article&id=41&Itemid=203 -->
+<section class="block" id="media">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Media &amp; Management</span>
+      <h2><span class="es">La Finta</span><span class="en">La Finta</span></h2>
+    </div>
+    <div class="card">
+      <p class="es"><strong>La Finta</strong> es un programa de entrevistas creado en la Delegación de Estudiantes del <a href="https://www.inef.upm.es/" target="_blank" rel="noopener">INEF de Madrid</a>, concebido para dar a conocer las Ciencias del Deporte a través de entrevistas relacionadas con el objeto de estudio de las Ciencias de la Actividad Física y del Deporte.</p>
+      <p class="en"><strong>La Finta</strong> is an interview programme created by the Student Delegation of <a href="https://www.inef.upm.es/" target="_blank" rel="noopener">INEF Madrid</a>, designed to present the Sport Sciences through interviews related to the object of study of the Sciences of Physical Activity and Sport.</p>
+    </div>
+  </div>
+</section>
+
+<!-- =============================== CONTACTO =============================== -->
+<!-- Origen: index.php?option=com_mailto (formulario de contacto Joomla) y com_users&view=registration -->
+<section class="block alt" id="contacto">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow"><span class="es">Contacto</span><span class="en">Contact</span></span>
+      <h2><span class="es">Escríbenos o regístrate</span><span class="en">Write to us or register</span></h2>
+    </div>
+    <div class="contact-box">
+      <div class="card">
+        <h3><span class="es">Contacto</span><span class="en">Contact</span></h3>
+        <p class="es">Para consultas sobre docencia, tutorías, colaboración en PRODET® o el grupo de investigación, utiliza el formulario de contacto del sitio.</p>
+        <p class="en">For enquiries about teaching, office hours, collaboration in PRODET® or the research group, use the site's contact form.</p>
+        <a class="btn btn-primary" href="https://organizaciondeportiva.org/index.php?option=com_mailto&tmpl=component&template=protostar&link=4bf9b32d78bdebd2d8ef72c927cb52c7ee8e39ff" target="_blank" rel="noopener"><span class="es">Formulario de contacto</span><span class="en">Contact form</span> ↗</a>
+      </div>
+      <div class="card">
+        <h3><span class="es">Área de usuarios</span><span class="en">User area</span></h3>
+        <p class="es">Crea una cuenta para acceder a los contenidos reservados a usuarios registrados.</p>
+        <p class="en">Create an account to access content reserved for registered users.</p>
+        <a class="btn btn-outline" href="https://organizaciondeportiva.org/index.php?option=com_users&view=registration" target="_blank" rel="noopener"><span class="es">Registro</span><span class="en">Register</span> ↗</a>
+        <a class="btn btn-outline" href="https://organizaciondeportiva.org/index.php?option=com_users&view=login" target="_blank" rel="noopener"><span class="es">Iniciar sesión</span><span class="en">Log in</span> ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- =============================== FOOTER =============================== -->
+<footer>
+  <div class="container">
+    <div>© 2015–2025 <strong>Sport Management</strong> · <span class="es">Organización del Deporte</span><span class="en">Sports Organisation</span></div>
+    <nav aria-label="Pie de página">
+      <a href="#nosotros"><span class="es">Nosotros</span><span class="en">About</span></a>
+      <a href="#apuntes"><span class="es">Apuntes</span><span class="en">Notes</span></a>
+      <a href="#prodet">PRODET®</a>
+      <a href="#bibliografia"><span class="es">Bibliografía</span><span class="en">Bibliography</span></a>
+      <a href="#enlaces"><span class="es">Enlaces</span><span class="en">Links</span></a>
+      <a href="https://organizaciondeportiva.org/" target="_blank" rel="noopener"><span class="es">Sitio original</span><span class="en">Original site</span> ↗</a>
+    </nav>
+  </div>
+</footer>
+
+<a class="to-top btn btn-primary" id="toTop" href="#inicio" aria-label="Volver arriba / Back to top">↑</a>
+
+<script>
+(function () {
+  'use strict';
+
+  // Poner en false cuando el contenido esté verificado contra el sitio original.
+  var SHOW_VERIFY_NOTICE = true;
+
+  var root = document.documentElement;
+  var TITLES = {
+    es: 'Sport Management · Organización del Deporte',
+    en: 'Sport Management · Sports Organisation'
+  };
+
+  /* ---------- Idioma ---------- */
+  function safeGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function safeSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+
+  function setLang(lang, persist) {
+    if (lang !== 'es' && lang !== 'en') lang = 'es';
+    root.setAttribute('data-lang', lang);
+    root.setAttribute('lang', lang);
+    document.title = TITLES[lang];
+    document.querySelectorAll('[data-set-lang]').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.getAttribute('data-set-lang') === lang));
+    });
+    if (persist) safeSet('sm-lang', lang);
+  }
+
+  var saved = safeGet('sm-lang');
+  var initial = saved || ((navigator.language || 'es').toLowerCase().indexOf('en') === 0 ? 'en' : 'es');
+  setLang(initial, false);
+
+  document.querySelectorAll('[data-set-lang]').forEach(function (b) {
+    b.addEventListener('click', function () { setLang(b.getAttribute('data-set-lang'), true); });
+  });
+
+  /* ---------- Tema claro / oscuro ---------- */
+  var savedTheme = safeGet('sm-theme');
+  if (savedTheme === 'dark' || savedTheme === 'light') root.setAttribute('data-theme', savedTheme);
+  document.getElementById('themeToggle').addEventListener('click', function () {
+    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var current = root.getAttribute('data-theme') || (prefersDark ? 'dark' : 'light');
+    var next = current === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    safeSet('sm-theme', next);
+  });
+
+  /* ---------- Menú móvil ---------- */
+  var nav = document.getElementById('nav');
+  var toggle = document.getElementById('menuToggle');
+  toggle.addEventListener('click', function () {
+    var open = nav.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', String(open));
+  });
+  nav.addEventListener('click', function (e) {
+    if (e.target.closest('a')) { nav.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); }
+  });
+
+  /* ---------- Sección activa en el menú ---------- */
+  var links = Array.prototype.slice.call(nav.querySelectorAll('a[href^="#"]'));
+  var sections = links.map(function (a) { return document.querySelector(a.getAttribute('href')); }).filter(Boolean);
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          links.forEach(function (a) { a.classList.toggle('active', a.getAttribute('href') === '#' + en.target.id); });
+        }
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    sections.forEach(function (s) { io.observe(s); });
+  }
+
+  /* ---------- Botón "volver arriba" ---------- */
+  var toTop = document.getElementById('toTop');
+  window.addEventListener('scroll', function () { toTop.classList.toggle('show', window.scrollY > 600); }, { passive: true });
+
+  /* ---------- Aviso de cotejo ---------- */
+  var notice = document.getElementById('verifyNotice');
+  if (SHOW_VERIFY_NOTICE && !safeGet('sm-notice-dismissed')) notice.hidden = false;
+  document.getElementById('dismissNotice').addEventListener('click', function () {
+    notice.hidden = true; safeSet('sm-notice-dismissed', '1');
+  });
+})();
+</script>
+</body>
+</html>
