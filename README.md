@@ -2,7 +2,7 @@
 
 Rediseño del sitio [organizaciondeportiva.org](https://organizaciondeportiva.org/) (Joomla, 2015) como una
 **única página estática** (`index.html`), sin dependencias externas, responsive, con tema **rojo / blanco / negro**
-(modo claro sobre blanco, modo oscuro sobre negro), **selector de idioma Español / English**, huecos para fotos y
+(modo claro: blanco y rojo con texto negro; modo oscuro: negro y rojo con texto blanco), **selector de idioma Español / English**, huecos para fotos y
 contacto directo con el **Dr. Víctor Jiménez Díaz-Benito**.
 
 ## Uso
@@ -31,12 +31,25 @@ Cada `<figure class="photo" data-src="images/…">` es un hueco para una foto. B
 carpeta `images/` con el nombre indicado: si existe se muestra, si no aparece un marcador con el nombre esperado.
 La lista completa de nombres y proporciones está en [`images/README.md`](images/README.md).
 
+## Apuntes (PDF)
+
+La sección `#apuntes` es la principal del sitio: cinco temas con un botón «PDF». Guarda `apuntes/tema-N.pdf` y el
+botón se activa solo (ver [`apuntes/README.md`](apuntes/README.md)).
+
+## Logo y enlace de la Universidad Europea
+
+El logo de la UE (`images/logo-ue.svg`, variante oscura `images/logo-ue-dark.svg`) va arriba a la izquierda y en el
+pie, enlazado a la URL definida en `UE_URL` (script de `index.html`). Cambia esa constante para apuntar a otra página.
+
 ## Contacto: Víctor Jiménez
 
-El correo `victor.jimenez@universidadeuropea.es` aparece en la portada, en la ficha de "Nosotros", en la sección
-"Contacto" y en el botón flotante (que abre un popup con el correo y botones *Escribir* / *Copiar*; se abre solo una
-vez por visitante a los 8 s, ajustable con `AUTO_POPUP_SECONDS` en el script). Para cambiar el correo, buscar y
-reemplazar esa dirección en `index.html`.
+El correo `victor.jimenez@universidadeuropea.es` aparece en la ficha de "Nosotros", en tutorías, en PRODET® y en la
+sección "Contacto". Para cambiarlo, buscar y reemplazar esa dirección en `index.html`.
+
+## Registro / inicio de sesión
+
+Los botones «Registro» e «Iniciar sesión» todavía apuntan al Joomla antiguo. El plan para sustituirlos por una base de
+datos propia está en [`docs/BASE-DE-DATOS.md`](docs/BASE-DE-DATOS.md).
 
 ## Correspondencia con el sitio original
 
@@ -48,7 +61,7 @@ Cada sección lleva un comentario `<!-- Origen: … -->` con la URL Joomla de la
 | `#nosotros`, `#victor` | `index.php?option=com_content&view=article&id=37&Itemid=197` — Nosotros |
 | `#cursos` | `…&id=3&Itemid=159` — CURSOS / `…&id=3&Itemid=189` — Ordenación Jurídica 1º CAFYD (UCJC 2015-2022) |
 | `#tutorias` | `…&id=23&Itemid=186` y `…&id=44&Itemid=211` — Organización del Deporte |
-| `#apuntes` | `…&id=6&Itemid=162` — Apuntes |
+| `#apuntes` (sección destacada, con PDF por tema) | `…&id=6&Itemid=162` — Apuntes |
 | `#prodet` | `…&id=25&Itemid=188` — PRODET® |
 | `#grupos` | `…&id=14&Itemid=171` — Research groups |
 | `#reviews` | `…&id=13&Itemid=168` — Recent reviews |
