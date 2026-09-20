@@ -4,9 +4,9 @@ Guarda aquí las fotos con **exactamente** estos nombres; la página las detecta
 
 | Archivo | Dónde aparece | Proporción recomendada |
 |---|---|---|
+| `logo-ue.svg` / `logo-ue-dark.svg` | Logo de la Universidad Europea (cabecera y pie; variante oscura con texto blanco). Ya incluidos. | — |
 | `hero.jpg` | Imagen grande de la portada | vertical 4:5 (p. ej. 1200×1500) |
-| `victor-jimenez.jpg` | Retrato de Víctor en "Nosotros" + avatares (portada y popup) | vertical 4:5 |
-| `victor-jimenez-2.jpg` | Sección "Contacto" | 4:3 |
+| `victor-jimenez.jpg` | Retrato de Víctor en "Nosotros" | vertical 4:5 |
 | `prodet.jpg` | Tarjeta PRODET® | panorámica 16:7 |
 | `la-finta.jpg` | Media & Management (La Finta) | 4:3 |
 | `galeria-1.jpg` … `galeria-6.jpg` | Galería | 4:3 |
