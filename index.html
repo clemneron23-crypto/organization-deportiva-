@@ -24,7 +24,9 @@
       Si el archivo existe en el servidor, el botón se activa solo; si no,
       muestra "Próximamente". Ver apuntes/README.md.
     · FOTOS: cada <figure class="photo" data-src="images/xxx.jpg"> es un hueco.
-      Basta con guardar la imagen con ese nombre en images/. Ver images/README.md.
+      Guarda la imagen con ese nombre en images/ y aparece sola con su leyenda;
+      si el archivo no existe, el hueco se oculta y no deja rastro en la página.
+      Nombres y proporciones en images/README.md.
     · CONTACTO: correo de Víctor Jiménez en "Nosotros", tutorías, PRODET® y
       "Contacto". Para cambiarlo: buscar y reemplazar la dirección.
     · Cada sección conserva, en un comentario, la URL original de Joomla.
@@ -103,9 +105,10 @@
       html:not([data-theme="light"]) img.logo-dark { display: block; }
     }
     .brand-sep { width: 1px; height: 34px; background: var(--line); }
-    @media (max-width: 1440px) { .brand-text { display: none; } .brand-sep { display: none; } }
     .brand-text { display: flex; flex-direction: column; line-height: 1.1; font-weight: 800; color: var(--text); }
     .brand-text small { font-weight: 500; color: var(--text-muted); font-size: .75rem; }
+    /* Entre 1240 y 1440 px se oculta el rótulo para que el menú quepa en una línea. */
+    @media (max-width: 1440px) { .brand-text { display: none; } .brand-sep { display: none; } }
     .nav { margin-left: auto; display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: 2px; min-width: 0; }
     .nav a { color: var(--text); padding: 8px 10px; border-radius: 8px; font-weight: 600; font-size: .9rem; white-space: nowrap; }
     .nav a:hover { background: var(--bg-soft); text-decoration: none; }
@@ -137,6 +140,7 @@
     .hero { position: relative; overflow: hidden; background: var(--surface); color: var(--text); border-bottom: 1px solid var(--line); }
     .hero::before { content: ""; position: absolute; top: -10%; bottom: -10%; right: -6%; width: 46%; background: var(--red); transform: skewX(-8deg); }
     .hero .container { position: relative; z-index: 1; padding: clamp(56px, 8vw, 104px) 0; display: grid; gap: 40px; grid-template-columns: 1.15fr .85fr; align-items: center; }
+    .hero .container:has(> .photo.no-img) { grid-template-columns: 1fr; }
     @media (max-width: 900px) { .hero .container { grid-template-columns: 1fr; } .hero::before { top: auto; height: 46%; width: 130%; right: -15%; transform: skewY(-6deg); } }
     .hero-copy { display: grid; gap: 18px; }
     .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; color: var(--red); }
@@ -160,20 +164,19 @@
     .stat strong { display: block; font-size: 1.4rem; color: var(--text); }
     .stat span { font-size: .85rem; color: var(--text-muted); }
 
-    /* ---------- Fotos (huecos) ---------- */
-    .photo { margin: 0; position: relative; border-radius: var(--radius); overflow: hidden; background: var(--bg-soft); border: 2px dashed var(--red); aspect-ratio: var(--ratio, 4 / 3); display: grid; place-items: center; text-align: center; color: var(--text-muted); font-size: .85rem; }
-    .photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: none; }
-    .photo .ph { display: grid; gap: 6px; place-items: center; padding: 16px; }
-    .photo .ph svg { width: 34px; height: 34px; color: var(--red); }
-    .photo .ph code { font-size: .75rem; background: var(--bg-elev); }
-    .photo.has-img { border-style: solid; border-color: var(--line); }
-    .photo.has-img img { display: block; }
-    .photo.has-img .ph { display: none; }
-    .photo figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 8px 12px; background: linear-gradient(transparent, rgba(0,0,0,.7)); color: #fff; font-size: .8rem; text-align: left; display: none; }
-    .photo.has-img figcaption { display: block; }
-    .hero .photo { --ratio: 4 / 5; background: var(--bg-elev); border-color: #fff; box-shadow: 0 30px 60px rgba(0,0,0,.35); }
-    .gallery { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
-    .gallery .photo { --ratio: 4 / 3; }
+    /* ---------- Fotos ---------- */
+    /* Cada hueco reserva su espacio mientras carga; si el archivo no existe se oculta (.no-img). */
+    .photo { margin: 0; position: relative; border-radius: var(--radius); overflow: hidden; background: var(--bg-soft); border: 1px solid var(--line); aspect-ratio: var(--ratio, 4 / 3); }
+    .photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .25s; }
+    .photo.has-img img { opacity: 1; }
+    .photo.no-img { display: none; }
+    .photo figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 8px 12px; background: linear-gradient(transparent, rgba(0,0,0,.75)); color: #fff; font-size: .8rem; line-height: 1.35; text-align: left; opacity: 0; transition: opacity .25s; }
+    .photo.has-img figcaption { opacity: 1; }
+    .hero .photo { --ratio: 4 / 5; box-shadow: 0 24px 50px rgba(0,0,0,.28); }
+    .gallery { display: flex; flex-wrap: wrap; gap: 14px; }
+    .gallery .photo { --ratio: 4 / 3; flex: 1 1 300px; max-width: 600px; }
+    /* En pantallas medias y pequeñas la última foto ocupa el ancho restante, sin dejar hueco. */
+    @media (max-width: 1000px) { .gallery .photo { max-width: none; } }
 
     /* ---------- Secciones ---------- */
     section.block { padding: clamp(48px, 7vw, 88px) 0; border-bottom: 1px solid var(--line); }
@@ -189,6 +192,7 @@
     .card h3 .ico svg { width: 18px; height: 18px; }
     .card .src { font-size: .85rem; color: var(--text-muted); border-top: 1px dashed var(--line); padding-top: 10px; margin-top: 12px; }
     .card .photo { margin-bottom: 16px; }
+    .notes-side { display: grid; gap: 16px; align-content: start; }
     .tag { display: inline-block; font-size: .75rem; font-weight: 800; padding: 3px 9px; border-radius: 999px; background: var(--red); color: #fff; margin-right: 6px; }
     .list-links li { display: flex; gap: 8px; align-items: baseline; }
     .list-links li::before { content: "↗"; color: var(--red); font-weight: 800; flex: none; }
@@ -223,6 +227,8 @@
     .person { display: grid; grid-template-columns: 200px 1fr; gap: 24px; align-items: start; }
     @media (max-width: 700px) { .person { grid-template-columns: 1fr; } }
     .person .photo { --ratio: 4 / 5; margin: 0; }
+    /* Si la foto no existe, el texto ocupa todo el ancho en lugar de dejar una columna vacía. */
+    .person:has(> .photo.no-img) { grid-template-columns: 1fr; }
     .email { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; color: var(--red); word-break: break-all; }
     .email svg { width: 18px; height: 18px; flex: none; }
     .contact-box { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
@@ -335,8 +341,7 @@
 
     <figure class="photo" data-src="images/hero.jpg">
       <img alt="Sport Management European Research Group">
-      <div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg><span class="es">Foto principal</span><span class="en">Main photo</span><code>images/hero.jpg</code></div>
-      <figcaption>Sport Management European Research Group</figcaption>
+      <figcaption><span class="es">EOSE — European Observatoire of Sport and Employment</span><span class="en">EOSE — European Observatoire of Sport and Employment</span></figcaption>
     </figure>
   </div>
 </section>
@@ -357,12 +362,18 @@
         <p class="muted es">Cada tema incluye un botón de descarga (PDF); los que aún no están disponibles aparecen como «Próximamente».</p>
         <p class="muted en">Each topic has a download button (PDF); those not yet available are shown as "Coming soon".</p>
       </div>
-      <div class="notes-book">
+      <div class="notes-side">
+        <figure class="photo" data-src="images/apuntes.jpg">
+          <img alt="Clase de Organización del Deporte">
+          <figcaption><span class="es">Clase de Organización del Deporte: la organización privada</span><span class="en">Sports Organisation class: private organisation</span></figcaption>
+        </figure>
+        <div class="notes-book">
         <h4><span class="es">Manual de referencia</span><span class="en">Reference textbook</span></h4>
         <strong>Blanco, E. (2006). <em>Manual de la organización institucional del deporte</em>.</strong>
         <span class="muted">Barcelona: Editorial Paidotribo.</span>
         <p class="muted es" style="margin:10px 0 0">Fuente principal de los apuntes. Ver también la <a href="#bibliografia">bibliografía recomendada</a>.</p>
         <p class="muted en" style="margin:10px 0 0">Main source of the notes. See also the <a href="#bibliografia">recommended bibliography</a>.</p>
+        </div>
       </div>
     </div>
 
@@ -412,6 +423,10 @@
                  Ordenación Jurídica - 1º CAFYD (UCJC, 2015-2022) — id=3&Itemid=189 -->
     <div class="grid grid-2">
       <article class="card" id="cursos">
+        <figure class="photo" data-src="images/docencia.jpg">
+          <img alt="Sesión con estudiantes">
+          <figcaption><span class="es">Sesión con estudiantes en el aula</span><span class="en">Session with students in the classroom</span></figcaption>
+        </figure>
         <h3><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span><span class="es">Cursos</span><span class="en">Courses</span></h3>
         <ul>
           <li><span class="tag">UCJC · 2015–2022</span><span class="es"><strong>Ordenación Jurídica</strong> — 1º CAFYD (Grado en Ciencias de la Actividad Física y del Deporte, Universidad Camilo José Cela).</span><span class="en"><strong>Legal Regulation of Sport</strong> — 1st year CAFYD (Degree in Physical Activity and Sport Sciences, Universidad Camilo José Cela).</span></li>
@@ -456,6 +471,10 @@
 
     <div class="grid grid-2" style="margin-bottom:20px">
       <article class="card">
+        <figure class="photo" data-src="images/grupo.jpg" style="--ratio: 16 / 7">
+          <img alt="El grupo en la Universidad Europea de Madrid">
+          <figcaption><span class="es">El grupo en la Universidad Europea de Madrid</span><span class="en">The group at Universidad Europea de Madrid</span></figcaption>
+        </figure>
         <h3><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><span class="es">El grupo</span><span class="en">The group</span></h3>
         <p class="es">Sport Management es el grupo de investigación europeo en gestión del deporte (<em>Sport Management European Research Group</em>) vinculado a la <a href="https://universidadeuropea.com/" data-ue-link target="_blank" rel="noopener">Universidad Europea de Madrid</a>. Reúne a docentes e investigadores de distintas universidades españolas dedicados a la organización y gestión deportiva.</p>
         <p class="en">Sport Management is the European research group in sport management (<em>Sport Management European Research Group</em>) linked to <a href="https://universidadeuropea.com/" data-ue-link target="_blank" rel="noopener">Universidad Europea de Madrid</a>. It brings together lecturers and researchers from several Spanish universities devoted to sports organisation and management.</p>
@@ -483,7 +502,6 @@
       <div class="person">
         <figure class="photo" data-src="images/victor-jimenez.jpg">
           <img alt="Dr. Víctor Jiménez Díaz-Benito">
-          <div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span class="es">Retrato</span><span class="en">Portrait</span><code>images/victor-jimenez.jpg</code></div>
           <figcaption>Dr. Víctor Jiménez Díaz-Benito</figcaption>
         </figure>
         <div>
@@ -515,7 +533,6 @@
       <article class="card" id="prodet">
         <figure class="photo" data-src="images/prodet.jpg" style="--ratio: 16 / 7">
           <img alt="PRODET®">
-          <div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg><span class="es">Foto PRODET®</span><span class="en">PRODET® photo</span><code>images/prodet.jpg</code></div>
           <figcaption>PRODET® — <span class="es">Promoción de Ejercicio en el Trabajo</span><span class="en">Promotion of Exercise at Work</span></figcaption>
         </figure>
         <h3><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>PRODET®</h3>
@@ -682,15 +699,14 @@
     <div class="section-head">
       <span class="eyebrow"><span class="es">Galería</span><span class="en">Gallery</span></span>
       <h2><span class="es">En imágenes</span><span class="en">In pictures</span></h2>
-      <p class="muted"><span class="es">Congresos, clases, PRODET® y actividades del grupo. Guarda cada foto en la carpeta <code>images/</code> con el nombre indicado y aparecerá aquí automáticamente.</span><span class="en">Conferences, classes, PRODET® and group activities. Save each photo in the <code>images/</code> folder with the name shown and it will appear here automatically.</span></p>
+      <p class="muted"><span class="es">Congresos, seminarios, clases y actividades del grupo de investigación.</span><span class="en">Conferences, seminars, classes and activities of the research group.</span></p>
     </div>
     <div class="gallery">
-      <figure class="photo" data-src="images/galeria-1.jpg"><img alt=""><div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg><code>images/galeria-1.jpg</code></div><figcaption><span class="es">Foto 1</span><span class="en">Photo 1</span></figcaption></figure>
-      <figure class="photo" data-src="images/galeria-2.jpg"><img alt=""><div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg><code>images/galeria-2.jpg</code></div><figcaption><span class="es">Foto 2</span><span class="en">Photo 2</span></figcaption></figure>
-      <figure class="photo" data-src="images/galeria-3.jpg"><img alt=""><div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg><code>images/galeria-3.jpg</code></div><figcaption><span class="es">Foto 3</span><span class="en">Photo 3</span></figcaption></figure>
-      <figure class="photo" data-src="images/galeria-4.jpg"><img alt=""><div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg><code>images/galeria-4.jpg</code></div><figcaption><span class="es">Foto 4</span><span class="en">Photo 4</span></figcaption></figure>
-      <figure class="photo" data-src="images/galeria-5.jpg"><img alt=""><div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg><code>images/galeria-5.jpg</code></div><figcaption><span class="es">Foto 5</span><span class="en">Photo 5</span></figcaption></figure>
-      <figure class="photo" data-src="images/galeria-6.jpg"><img alt=""><div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg><code>images/galeria-6.jpg</code></div><figcaption><span class="es">Foto 6</span><span class="en">Photo 6</span></figcaption></figure>
+      <figure class="photo" data-src="images/galeria-1.jpg"><img alt="" loading="lazy" decoding="async"><figcaption><span class="es">Asamblea General y Seminario de Miembros de EOSE 2025</span><span class="en">EOSE General Assembly and Member Seminar 2025</span></figcaption></figure>
+      <figure class="photo" data-src="images/galeria-2.jpg"><img alt="" loading="lazy" decoding="async"><figcaption><span class="es">Encuentro de la red EOSE</span><span class="en">EOSE network meeting</span></figcaption></figure>
+      <figure class="photo" data-src="images/galeria-3.jpg"><img alt="" loading="lazy" decoding="async"><figcaption><span class="es">Congreso Iberoamericano de Economía del Deporte</span><span class="en">Ibero-American Congress on Sports Economics</span></figcaption></figure>
+      <figure class="photo" data-src="images/galeria-4.jpg"><img alt="" loading="lazy" decoding="async"><figcaption><span class="es">Encuentro: pasado, presente y futuro de la profesión de la Educación Física y Deportiva</span><span class="en">Meeting: past, present and future of the Physical Education and Sport profession</span></figcaption></figure>
+      <figure class="photo" data-src="images/galeria-5.jpg"><img alt="" loading="lazy" decoding="async"><figcaption><span class="es">Seminario de trabajo sobre cualificaciones profesionales en el deporte</span><span class="en">Working seminar on professional qualifications in sport</span></figcaption></figure>
     </div>
   </div>
 </section>
@@ -707,7 +723,6 @@
       <div class="person">
         <figure class="photo" data-src="images/la-finta.jpg" style="--ratio: 4 / 3">
           <img alt="La Finta">
-          <div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg><span class="es">Foto / fotograma</span><span class="en">Photo / still</span><code>images/la-finta.jpg</code></div>
           <figcaption>La Finta</figcaption>
         </figure>
         <div>
@@ -841,8 +856,8 @@
   /* ---------- Fotos: se muestran si el archivo existe en images/ ---------- */
   document.querySelectorAll('figure.photo[data-src]').forEach(function (fig) {
     var img = fig.querySelector('img'); if (!img) return;
-    img.addEventListener('load', function () { fig.classList.add('has-img'); });
-    img.addEventListener('error', function () { fig.classList.remove('has-img'); });
+    img.addEventListener('load', function () { fig.classList.add('has-img'); fig.classList.remove('no-img'); });
+    img.addEventListener('error', function () { fig.classList.remove('has-img'); fig.classList.add('no-img'); });
     img.src = fig.getAttribute('data-src');
   });
 
