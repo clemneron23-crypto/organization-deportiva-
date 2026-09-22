@@ -27,9 +27,11 @@ Para añadir o corregir un texto: edita el `<span class="es">…</span><span cla
 
 ## Fotos
 
-Cada `<figure class="photo" data-src="images/…">` es un hueco para una foto. Basta con guardar el archivo en la
-carpeta `images/` con el nombre indicado: si existe se muestra, si no aparece un marcador con el nombre esperado.
-La lista completa de nombres y proporciones está en [`images/README.md`](images/README.md).
+Cada `<figure class="photo" data-src="images/…">` es un hueco para una foto: se guarda el archivo en `images/` con
+el nombre indicado y aparece solo, con su leyenda bilingüe. **Si el archivo no existe, el hueco se oculta** y no
+deja ningún rastro en la página (ni marcadores ni columnas vacías). Hay diez fotos colocadas —portada, apuntes,
+docencia, grupo, retrato del director y cinco en la galería— y dos huecos libres (`prodet.jpg`, `la-finta.jpg`).
+La lista completa de nombres, proporciones y contenidos está en [`images/README.md`](images/README.md).
 
 ## Apuntes (PDF)
 
